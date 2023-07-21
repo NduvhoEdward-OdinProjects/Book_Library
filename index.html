@@ -38,9 +38,25 @@
   </div>
 
   <div class="fab-container new-book-button">
-    <button class="fab">+</button>
+    <button class="fab" id="open-modal">+</button>
   </div>
-  <!-- <button class="new-book-button">NEW BOOK</button> -->
+
+  <div class="modal-container" id="add-modal">
+    <div class="modal-content">
+      <form id="add-book-form">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+        <label for="author">Author:</label>
+        <input type="text" id="author" required>
+        <label for="pages">Pages:</label>
+        <input type="number" id="pages" required>
+        <label for="read">Read:</label>
+        <input type="checkbox" id="read">
+        <button type="submit">Add Book</button>
+        <button type="button" id="close-modal">Close</button>
+      </form>
+    </div>
+  </div>
 
   <div class="sidebar">
 

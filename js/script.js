@@ -54,7 +54,6 @@ function displayBooks() {
 }
 
 
-
 function removeBook(index) {
   myLibrary.splice(index, 1);
   displayBooks();
@@ -66,20 +65,6 @@ function toggleReadStatus(index) {
 }
 
 const newBookButton = document.querySelector('.new-book-button');
-console.log(newBookButton);
-
-newBookButton.addEventListener('click', () => {
-  const title = prompt('Enter book title:');
-  const author = prompt('Enter book author:');
-  const pages = prompt('Enter number of pages:');
-  const read = confirm('Has the book been read?');
-
-  if (title && author && pages) {
-    addBookToLibrary(title, author, pages, read);
-    displayBooks();
-  }
-});
-
 document.getElementById('book-container').addEventListener('click', (event) => {
   const target = event.target;
   if (target.classList.contains('remove-button')) {
@@ -98,3 +83,35 @@ addBookToLibrary('Book 3', 'Author 3', 400, true);
 
 // Display the books
 displayBooks();
+
+
+// Form Modal
+const modalContainer = document.getElementById('add-modal');
+const openModalButton = document.getElementById('open-modal');
+const closeModalButton = document.getElementById('close-modal');
+const addBookForm = document.getElementById('add-book-form');
+const bookContainer = document.getElementById('book-container');
+
+openModalButton.addEventListener('click', function () {
+  modalContainer.classList.add('show-modal');
+  bookContainer.classList.add('blur');
+});
+
+closeModalButton.addEventListener('click', function () {
+modalContainer.classList.remove('show-modal')
+});
+
+addBookForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const pages = parseInt(document.getElementById('pages').value);
+  const read = document.getElementById('read').checked;
+
+  if (title && author && !isNaN(pages)) {
+    addBookToLibrary(title, author, pages, read);
+    displayBooks();
+    addBookForm.reset(); // Clear form fields after submission
+    modalContainer.style.display = 'none'; // Hide the modal after adding the book
+  }
+});
